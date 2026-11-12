@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ["src/CameraControl.Domain/CameraControl.Domain.csproj", "src/CameraControl.Domain/"]
+COPY ["src/CameraControl.Application/CameraControl.Application.csproj", "src/CameraControl.Application/"]
+COPY ["src/CameraControl.Infrastructure/CameraControl.Infrastructure.csproj", "src/CameraControl.Infrastructure/"]
+COPY ["src/CameraControl.ChildServer/CameraControl.ChildServer.csproj", "src/CameraControl.ChildServer/"]
+
+RUN dotnet restore "src/CameraControl.ChildServer/CameraControl.ChildServer.csproj"
+
+COPY src/ src/
+WORKDIR "/src/src/CameraControl.ChildServer"
+RUN dotnet publish "CameraControl.ChildServer.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "CameraControl.ChildServer.dll"]

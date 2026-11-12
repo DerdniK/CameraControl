@@ -1,0 +1,24 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ["src/CameraControl.Domain/CameraControl.Domain.csproj", "src/CameraControl.Domain/"]
+COPY ["src/CameraControl.Application/CameraControl.Application.csproj", "src/CameraControl.Application/"]
+COPY ["src/CameraControl.Infrastructure/CameraControl.Infrastructure.csproj", "src/CameraControl.Infrastructure/"]
+COPY ["src/CameraControl.ParentServer/CameraControl.ParentServer.csproj", "src/CameraControl.ParentServer/"]
+
+RUN dotnet restore "src/CameraControl.ParentServer/CameraControl.ParentServer.csproj"
+
+COPY src/ src/
+WORKDIR "/src/src/CameraControl.ParentServer"
+RUN dotnet publish "CameraControl.ParentServer.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+ENV PARENT_IP=10.10.0.2
+ENV DOCKER_NETWORK_NAME=camera_net
+ENV CHILD_DOCKER_IMAGE=cameracontrol-child:latest
+
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "CameraControl.ParentServer.dll"]

@@ -1,0 +1,17 @@
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\bin\Debug\net10.0\CameraControl.Infrastructure.deps.json
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\bin\Debug\net10.0\CameraControl.Infrastructure.dll
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\bin\Debug\net10.0\CameraControl.Infrastructure.pdb
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\bin\Debug\net10.0\CameraControl.Application.dll
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\bin\Debug\net10.0\CameraControl.Domain.dll
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\bin\Debug\net10.0\CameraControl.Domain.pdb
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\bin\Debug\net10.0\CameraControl.Application.pdb
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraControl.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraControl.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraControl.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraControl.Infrastructure.AssemblyInfo.cs
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraControl.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraCo.0180BE5D.Up2Date
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraControl.Infrastructure.dll
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\refint\CameraControl.Infrastructure.dll
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\CameraControl.Infrastructure.pdb
+C:\Users\adolt\.gemini\antigravity\scratch\CameraControl\src\CameraControl.Infrastructure\obj\Debug\net10.0\ref\CameraControl.Infrastructure.dll

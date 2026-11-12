@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servidor Padre - Control de Camaras</title>
+  <link rel="stylesheet" href="/dashboard/dashboard.css?v=4" />
+</head>
+<body>
+  <!-- Barra superior limpia (sin botones duplicados de navegacion ni historial) -->
+  <nav class="topbar">
+    <div class="topbar-brand">
+      <span class="app-title">Servidor Padre | Orquestador de Camaras</span>
+    </div>
+
+    <div class="topbar-status">
+      <span>IP Padre: <b id="parentIpBadge">10.10.0.2</b></span>
+      <span class="divider">|</span>
+      <span>Hijos Online: <b id="statOnlineNodes">0/0</b></span>
+      <span class="divider">|</span>
+      <span>Capturas: <b id="statTotalCaptures">0</b></span>
+      <span class="divider">|</span>
+      <span>Ciclos Auto: <b id="statPollingCycles">0</b></span>
+    </div>
+  </nav>
+
+  <main class="workspace">
+    <!-- Franja Superior: Registro de Servidor Hijo y configuracion de Poleo Automatico -->
+    <section class="control-strip">
+      <form id="createNodeForm" class="strip-form">
+        <div class="strip-title">Nuevo Hijo</div>
+
+        <div class="input-col">
+          <label for="nodeName">Nombre</label>
+          <input type="text" id="nodeName" placeholder="Ej. Camara-Acceso-01" required />
+        </div>
+
+        <div class="input-col">
+          <label for="assignedIp">IP Hijo (Red 10.x.x.x)</label>
+          <div class="ip-input-group">
+            <input type="text" id="assignedIp" placeholder="10.10.0.11" required />
+            <button type="button" class="btn btn-xs" id="preset10Btn">Sugerir IP</button>
+          </div>
+        </div>
+
+        <div class="input-col">
+          <label for="cameraIp">IP Camara (opcional)</label>
+          <input type="text" id="cameraIp" placeholder="10.20.1.11" />
+        </div>
+
+        <div class="input-col small-col">
+          <label for="nodePort">Puerto</label>
+          <input type="number" id="nodePort" value="8080" min="1024" max="65535" />
+        </div>
+
+        <div class="input-col action-col">
+          <button type="submit" class="btn btn-dark">Crear Hijo</button>
+        </div>
+      </form>
+
+      <div class="polling-strip">
+        <div class="strip-title">Poleo Automatico</div>
+        <label class="check-inline">
+          <input type="checkbox" id="pollingEnabled" />
+          <span>Activo</span>
+        </label>
+        <div class="input-col small-col">
+          <label for="pollingInterval">Segundos</label>
+          <input type="number" id="pollingInterval" value="15" min="3" max="3600" />
+        </div>
+        <button type="button" class="btn" id="savePollingBtn">Aplicar</button>
+      </div>
+    </section>
+
+    <!-- Area Central en 2 Columnas: Tabla de Hijos (Izquierda) y Respuesta JSON (Derecha) -->
+    <section class="split-board">
+      <!-- Panel Izquierdo: Tabla de Servidores Hijos -->
+      <div class="card">
+        <div class="card-head">
+          <h2>Servidores Hijos Registrados (<span id="nodeCountLabel">0</span>)</h2>
+          <div class="head-btns">
+            <button type="button" class="btn btn-accent" id="captureAllBtn">Solicitar Foto a Todos</button>
+            <button type="button" class="btn" id="refreshBtn">Refrescar</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>IP Hijo</th>
+                <th>IP Camara</th>
+                <th>IP Padre</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="nodesTableBody">
+              <tr>
+                <td colspan="7" class="empty-row">No hay servidores hijos registrados.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Panel Derecho: Respuesta del Hijo (Imagen pequeña + JSON + unico boton de Historial) -->
+      <div class="card">
+        <div class="card-head">
+          <h2>Respuesta del Servidor Hijo</h2>
+          <div class="head-btns">
+            <button type="button" class="btn" id="copyJsonBtn">Copiar JSON</button>
+            <button type="button" class="btn btn-dark" id="openHistoryBtn">Ver Historial en Otra Ventana</button>
+          </div>
+        </div>
+
+        <div class="capture-summary-bar">
+          <div class="mini-preview" id="framePreviewBox">
+            <span>Sin captura</span>
+          </div>
+          <div class="capture-details" id="captureMetaInfo">
+            <div><strong>Estado:</strong> Crea un servidor hijo y solicita una captura para recibir su JSON.</div>
+          </div>
+        </div>
+
+        <div class="json-section">
+          <div class="json-label">Payload JSON Retornado:</div>
+          <pre class="json-output" id="jsonViewer">{}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="status-toast" id="toastBox"></div>
+
+  <script src="/dashboard/dashboard.js?v=4"></script>
+</body>
+</html>

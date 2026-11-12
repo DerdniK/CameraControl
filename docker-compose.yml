@@ -1,0 +1,40 @@
+services:
+  child-image-builder:
+    build:
+      context: .
+      dockerfile: Dockerfile.child
+    image: cameracontrol-child:latest
+    container_name: cameracontrol-child-image-builder
+    entrypoint: ["echo", "Imagen base cameracontrol-child:latest lista para creacion dinamica"]
+    restart: "no"
+
+  parent-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.parent
+    image: cameracontrol-parent:latest
+    container_name: camera-parent-server
+    depends_on:
+      - child-image-builder
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:8080
+      - PARENT_IP=10.10.0.2
+      - DOCKER_NETWORK_NAME=camera_net
+      - CHILD_DOCKER_IMAGE=cameracontrol-child:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      camera_net:
+        ipv4_address: 10.10.0.2
+
+networks:
+  camera_net:
+    name: camera_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
+          gateway: 10.10.0.1

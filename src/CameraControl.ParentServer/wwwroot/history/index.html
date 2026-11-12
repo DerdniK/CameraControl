@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CameraControl - Historial de Capturas</title>
+  <link rel="stylesheet" href="/history/history.css?v=4" />
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <div>
+        <h1>CameraControl - Historial de Capturas</h1>
+        <p>Registro historico de respuestas JSON enviadas por los servidores hijos</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="stat-tag">Total en Historial: <strong id="totalCountBadge">0</strong></div>
+      <a href="/dashboard/index.html" class="btn btn-primary">Ir al Panel Principal</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Columna Izquierda: Tabla de historial -->
+    <div class="box">
+      <div class="box-header">
+        <span>Capturas Registradas</span>
+        <div class="filter-bar">
+          <select id="nodeFilterSelect">
+            <option value="">Todos los servidores hijos</option>
+          </select>
+          <button type="button" class="btn btn-sm" id="refreshHistoryBtn">Actualizar</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha / Hora</th>
+              <th>Servidor Hijo</th>
+              <th>IP Hijo</th>
+              <th>IP Camara</th>
+              <th>Origen</th>
+              <th>Latencia</th>
+              <th>Accion</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <tr>
+              <td colspan="7" class="muted-cell">Sin capturas registradas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Columna Derecha: Detalle de la captura seleccionada (Miniatura + JSON) -->
+    <div class="box">
+      <div class="box-header">
+        <span>Detalle de Captura Seleccionada</span>
+        <div class="filter-bar">
+          <button type="button" class="btn btn-sm" id="copySelectedJsonBtn">Copiar JSON</button>
+          <a id="openInMainBtn" href="/dashboard/index.html" class="btn btn-primary btn-sm">Abrir en Panel Principal</a>
+        </div>
+      </div>
+
+      <div class="detail-top">
+        <div class="thumbnail-container" id="detailPreviewBox">
+          <span class="empty-thumb">Sin captura seleccionada</span>
+        </div>
+        <div class="detail-meta" id="detailMetaBox">
+          Selecciona un registro de la tabla para inspeccionar su imagen compacta y su respuesta JSON.
+        </div>
+      </div>
+
+      <pre class="json-viewer" id="detailJsonViewer">{}</pre>
+    </div>
+  </div>
+
+  <div class="notice" id="toastBox"></div>
+
+  <script src="/history/history.js?v=4"></script>
+</body>
+</html>
